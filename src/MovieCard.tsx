@@ -21,14 +21,13 @@ const MovieCard: FC<Props> = ({ movie, ...rest }) => {
 				alt={movie.title}
 			/>
 			<div className="movie-card-body">
-				<div>
-					<small>
-						<b>{movie.vote_average}</b>/10 ({movie.vote_count} Reviews)
-					</small>
-				</div>
-				<div className="movie-title">{movie.title}</div>
 				<div className="movie-date">
 					<small>{formattedReleasedDate}</small>
+				</div>
+
+				<div className="movie-title">{movie.title}</div>
+				<div>
+					&#9734; <b>{movie.vote_average}</b> / 10 ({movie.vote_count} Reviews)
 				</div>
 			</div>
 		</div>
