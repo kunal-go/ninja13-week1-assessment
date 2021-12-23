@@ -10,7 +10,7 @@ const MovieCard: FC<Props> = ({ movie, ...rest }) => {
 	const releasedDate = new Date(movie.release_date)
 	const formattedReleasedDate = releasedDate.toLocaleString("en-US", {
 		year: "numeric",
-		month: "long",
+		month: "short",
 		day: "numeric",
 	})
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { IMovie } from "./IMovie"
 import MovieCard from "./MovieCard"
 import "./App.css"
@@ -8,6 +8,7 @@ export default function App() {
 	const pageNo = 1 // temporary hard-coded value
 
 	const [movies, setMovies] = useState<IMovie[]>([])
+	const [searchText, setSearchText] = useState<string>("")
 	const [errorMessage, setErrorMessage] = useState<string>()
 
 	const fetchMovies = useCallback(async () => {
@@ -28,13 +29,35 @@ export default function App() {
 		fetchMovies()
 	}, [fetchMovies])
 
+	const filteredMovies = useMemo(() => {
+		if (searchText !== "") {
+			return movies.filter((movie) =>
+				movie.title.toLowerCase().includes(searchText.toLowerCase()),
+			)
+		}
+		return movies
+	}, [movies, searchText])
+
 	return (
 		<div className="app">
-			<h1>Popular Movies</h1>
+			<header>
+				<h1>Popular Movies</h1>
+				{!errorMessage && (
+					<input
+						className="search-box"
+						type="text"
+						placeholder="Search Movie"
+						value={searchText}
+						onChange={(e) => {
+							setSearchText(e.target.value)
+						}}
+					/>
+				)}
+			</header>
 
 			{errorMessage && <div className="error">{errorMessage}</div>}
 			<div className="movie-card-list-container">
-				{movies.map((movie) => (
+				{filteredMovies.map((movie) => (
 					<MovieCard key={movie.id} movie={movie} className="movie-card" />
 				))}
 			</div>
