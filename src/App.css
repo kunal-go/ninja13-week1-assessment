@@ -1,0 +1,10 @@
+.app h1 {
+	margin-left: 30px;
+}
+
+.movie-card-list-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 30px;
+	margin: 30px;
+}

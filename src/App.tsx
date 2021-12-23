@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { IMovie } from "./IMovie"
 import MovieCard from "./MovieCard"
+import "./App.css"
 
 export default function App() {
 	const apiKey = process.env.REACT_APP_API_KEY
@@ -14,18 +15,18 @@ export default function App() {
 		const response = await fetch(url)
 		const data = await response.json()
 		setMovies(data.results)
-	}, [])
+	}, [apiKey, pageNo])
 
 	useEffect(() => {
 		fetchMovies()
-	}, [])
+	}, [fetchMovies])
 
 	return (
-		<div className="App">
-			Movie App
-			<div>
+		<div className="app">
+			<h1>Popular Movies</h1>
+			<div className="movie-card-list-container">
 				{movies.map((movie) => (
-					<MovieCard movie={movie} />
+					<MovieCard movie={movie} className="movie-card" />
 				))}
 			</div>
 		</div>
