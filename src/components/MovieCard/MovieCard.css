@@ -1,5 +1,5 @@
 .movie-card {
-	max-width: 420px;
+	max-width: 440px;
 	display: flex;
 	vertical-align: bottom;
 	gap: 7px;
@@ -18,7 +18,7 @@
 	color: #1e293b;
 	font-size: 20px;
 	font-weight: bold;
-	margin: 4px 0px;
+	margin: 3px 0px 4px 0px;
 }
 
 .movie-date {
