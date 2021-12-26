@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
-import { useFetchMovies } from "../../hooks/useFetchMovies"
-import { IMovie } from "../MovieCard/IMovie"
-import MovieCard from "../MovieCard/MovieCard"
-import "./App.css"
+import { useFetchMovies } from "../hooks/useFetchMovies"
+import { IMovie } from "../types/IMovie"
+import MovieCard from "./MovieCard"
 
 export default function App() {
 	const [pageNumber, setPageNumber] = useState(1)
@@ -26,19 +25,31 @@ export default function App() {
 
 	return (
 		<div className="app">
-			<header>
+			<header style={{ textAlign: "center" }}>
 				<h1>Popular Movies</h1>
-				{!errorMessage && (
-					<input
-						className="search-box"
-						type="text"
-						placeholder="Search Movie"
-						value={searchText}
-						onChange={(e) => {
-							setSearchText(e.target.value)
-						}}
-					/>
-				)}
+				<div>
+					{!errorMessage && (
+						<>
+							<input
+								type="text"
+								placeholder="Search Movies"
+								value={searchText}
+								onChange={(e) => {
+									setSearchText(e.target.value)
+								}}
+								style={{
+									width: "40%",
+									padding: "12px 20px",
+									margin: "8px 0",
+									display: "inline-block",
+									border: "1px solid #ccc",
+									borderRadius: "4px",
+									boxSizing: "border-box",
+								}}
+							/>
+						</>
+					)}
+				</div>
 			</header>
 
 			{errorMessage && <div className="error">{errorMessage}</div>}
@@ -52,9 +63,16 @@ export default function App() {
 				hasMore={hasMore}
 				loader={isLoading && <h4>Loading...</h4>}
 			>
-				<div className="movie-card-list-container">
+				<div
+					style={{
+						display: "flex",
+						flexWrap: "wrap",
+						justifyContent: "space-evenly",
+						margin: "20px auto",
+					}}
+				>
 					{filteredMovies.map((movie) => (
-						<MovieCard key={movie.id} movie={movie} className="movie-card" />
+						<MovieCard key={movie.id} movie={movie} />
 					))}
 				</div>
 			</InfiniteScroll>

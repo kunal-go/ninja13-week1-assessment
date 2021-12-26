@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { IMovie } from "../components/MovieCard/IMovie"
+import { IMovie } from "../types/IMovie"
 
 export function useFetchMovies(pageNumber: number) {
 	const apiKey = process.env.REACT_APP_API_KEY
