@@ -14,7 +14,7 @@ export default function MovieDetailsPage() {
 	const movieId = useParams().id as string
 	const { movieDetails, isLoading } = useFetchMovieDetails(movieId)
 	const { recommendedMovies } = useFetchMovieRecommendations(movieId)
-	const { castList } = useFetchMovieCredits(movieId)
+	const { castList, isLoading: isCastLoading } = useFetchMovieCredits(movieId)
 
 	if (isLoading) return <Loader />
 	if (!movieDetails) return null
@@ -44,9 +44,9 @@ export default function MovieDetailsPage() {
 				<Overview>{movieDetails.overview}</Overview>
 				<h2 style={{ marginTop: "30px" }}>Casts</h2>
 				<CastContainer>
-					{castList.map((cast) => (
-						<CastCard key={cast.id} cast={cast} />
-					))}
+					{isCastLoading && <Loader />}
+					{!isCastLoading &&
+						castList.map((cast) => <CastCard key={cast.id} cast={cast} />)}
 				</CastContainer>
 			</MainSection>
 			<RecommendationSection>
