@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { IMovie } from "../types/IMovie"
+import {} from "react-router"
 
 export function useFetchMovies(pageNumber: number) {
 	const apiKey = process.env.REACT_APP_API_KEY

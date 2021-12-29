@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
+import MovieCard from "../components/MovieCard"
 import { useFetchMovies } from "../hooks/useFetchMovies"
 import { IMovie } from "../types/IMovie"
-import MovieCard from "./MovieCard"
 
-export default function App() {
+export default function HomePage() {
 	const [pageNumber, setPageNumber] = useState(1)
 	const [searchText, setSearchText] = useState<string>("")
 	const [filteredMovies, setFilteredMovies] = useState<IMovie[]>([])
