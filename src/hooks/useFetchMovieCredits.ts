@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react"
-import { IMovieDetails } from "../types/IMovieDetails"
+import { ICast } from "../types/ICast"
 
-export function useFetchMovieDetails(movieId: string) {
+export function useFetchMovieCredits(movieId: string) {
 	const apiKey = process.env.REACT_APP_API_KEY
-	const [movieDetails, setMovieDetails] = useState<IMovieDetails>()
+	const [castList, setCastList] = useState<ICast[]>([])
 	const [isLoading, setIsLoading] = useState(false)
 	const [errorMessage, setErrorMessage] = useState<string>()
 
 	useEffect(() => {
 		setIsLoading(true)
 
-		const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`
+		const url = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`
 
 		fetch(url)
 			.then((res) => res.json())
 			.then((data) => {
-				setMovieDetails(data)
+				setCastList(data.cast)
 			})
 			.catch((err) => {
 				if (err instanceof Error) setErrorMessage(err.message)
@@ -26,5 +26,5 @@ export function useFetchMovieDetails(movieId: string) {
 			})
 	}, [apiKey, movieId])
 
-	return { movieDetails, isLoading, errorMessage }
+	return { castList, isLoading, errorMessage }
 }

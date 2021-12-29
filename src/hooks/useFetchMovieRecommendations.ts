@@ -10,7 +10,7 @@ export function useFetchMovieRecommendations(movieId: string) {
 	useEffect(() => {
 		setIsLoading(true)
 
-		const url = `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${apiKey}`
+		const url = `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${apiKey}`
 
 		fetch(url)
 			.then((res) => res.json())

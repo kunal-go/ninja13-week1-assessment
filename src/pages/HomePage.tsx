@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import { useEffect, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import Loader from "../components/Loader"
 import MovieCard from "../components/MovieCard"
 import { useFetchMovies } from "../hooks/useFetchMovies"
@@ -12,7 +12,6 @@ export default function HomePage() {
 	const [searchText, setSearchText] = useState<string>("")
 	const [filteredMovies, setFilteredMovies] = useState<IMovie[]>([])
 	const { movies, errorMessage, isLoading, hasMore } = useFetchMovies(pageNumber)
-	const navigate = useNavigate()
 
 	useEffect(() => {
 		if (searchText === "") {
@@ -35,10 +34,6 @@ export default function HomePage() {
 	function handleNextPage() {
 		if (searchText !== "") return
 		setPageNumber((currPageNumber) => currPageNumber + 1)
-	}
-
-	function handleMovieClick(movie: IMovie) {
-		navigate(`/movie/${movie.id}`)
 	}
 
 	return (
@@ -66,13 +61,13 @@ export default function HomePage() {
 				<ListContainer>
 					{isLoading && <Loader />}
 					{filteredMovies.map((movie) => (
-						<MovieCard
+						<Link
 							key={movie.id}
-							movie={movie}
-							onClick={() => {
-								handleMovieClick(movie)
-							}}
-						/>
+							to={`/movie/${movie.id}`}
+							style={{ textDecoration: "none" }}
+						>
+							<MovieCard movie={movie} />
+						</Link>
 					))}
 				</ListContainer>
 			</InfiniteScroll>
