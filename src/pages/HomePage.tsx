@@ -25,32 +25,46 @@ export default function HomePage() {
 
 	return (
 		<div className="app">
-			<header style={{ textAlign: "center" }}>
-				<h1>Popular Movies</h1>
-				<div>
-					{!errorMessage && (
-						<>
-							<input
-								type="text"
-								placeholder="Search Movies"
-								value={searchText}
-								onChange={(e) => {
-									setSearchText(e.target.value)
-								}}
-								style={{
-									width: "40%",
-									padding: "12px 20px",
-									margin: "8px 0",
-									display: "inline-block",
-									border: "1px solid #ccc",
-									borderRadius: "4px",
-									boxSizing: "border-box",
-								}}
-							/>
-						</>
-					)}
+			{/* Header  */}
+			<div
+				style={{
+					position: "fixed",
+					width: "100%",
+					backgroundColor: "rgba(255,255,255, 0.8)",
+					backdropFilter: "blur(10px)",
+					WebkitBackdropFilter: "blur(10px)",
+					borderBottom: "1px solid rgba(0,0,0,0.1)",
+					textAlign: "center",
+				}}
+			>
+				<div
+					style={{
+						fontSize: "25px",
+						fontWeight: "bold",
+						padding: "10px",
+					}}
+				>
+					Popular Movies
 				</div>
-			</header>
+				<div>
+					<label>Search Movie: </label>
+					<input
+						type="text"
+						value={searchText}
+						onChange={(e) => {
+							setSearchText(e.target.value)
+						}}
+						style={{
+							marginBottom: "10px",
+							padding: "7px 20px",
+							display: "inline-block",
+							border: "1px solid #ccc",
+							borderRadius: "4px",
+							boxSizing: "border-box",
+						}}
+					/>
+				</div>
+			</div>
 
 			{errorMessage && <div className="error">{errorMessage}</div>}
 
@@ -61,14 +75,14 @@ export default function HomePage() {
 					setPageNumber((currPageNumber) => currPageNumber + 1)
 				}}
 				hasMore={hasMore}
-				loader={isLoading && <h4>Loading...</h4>}
+				loader={isLoading && <h4 style={{ textAlign: "center" }}>Loading...</h4>}
 			>
 				<div
 					style={{
+						margin: "120px auto",
 						display: "flex",
 						flexWrap: "wrap",
 						justifyContent: "space-evenly",
-						margin: "20px auto",
 					}}
 				>
 					{filteredMovies.map((movie) => (
