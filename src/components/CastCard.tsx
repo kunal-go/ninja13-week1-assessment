@@ -24,7 +24,7 @@ const CastCard: FC<Props> = ({ cast, ...rest }) => {
 export default CastCard
 
 const Card = styled.div`
-	width: 150px;
+	width: 130px;
 	padding: 15px;
 	text-align: center;
 `

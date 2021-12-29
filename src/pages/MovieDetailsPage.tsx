@@ -106,6 +106,9 @@ const PosterCardBody = styled.div`
 const PosterImage = styled.img`
 	height: 320px;
 	max-width: 320px;
+	@media only screen and (max-width: 576px) {
+		display: none;
+	}
 `
 
 const MovieTitle = styled.div`
