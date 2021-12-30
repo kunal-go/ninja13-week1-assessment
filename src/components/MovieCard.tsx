@@ -1,21 +1,21 @@
 import styled from "@emotion/styled"
 import { ComponentProps, FC } from "react"
 import { IMovie } from "../types/IMovie"
-import { formattedDate, imageLink } from "../utils"
+import { imageLink } from "../utils"
+import ReleaseDate from "./ReleaseDate"
 
 interface Props extends ComponentProps<"div"> {
 	movie: IMovie
 }
 
 const MovieCard: FC<Props> = ({ movie, ...rest }) => {
-	const formattedReleasedDate = formattedDate(movie.release_date)
 	const imageUrl = imageLink(movie.poster_path ?? "")
 
 	return (
 		<Card {...rest}>
 			<PosterImage src={imageUrl} alt={movie.title} />
 			<div style={{ color: "#475569" }}>
-				<ReleasedDate>{formattedReleasedDate}</ReleasedDate>
+				<ReleaseDate date={movie.release_date} />
 				<Title>{movie.title}</Title>
 				<div>
 					&#9734; <b>{movie.vote_average}</b> / 10 ({movie.vote_count} Reviews)
@@ -36,12 +36,6 @@ const Card = styled.div`
 const PosterImage = styled.img`
 	height: 320px;
 	max-width: 320px;
-`
-
-const ReleasedDate = styled.div`
-	font-weight: bold;
-	text-transform: uppercase;
-	letter-spacing: 0.4px;
 `
 
 const Title = styled.div`

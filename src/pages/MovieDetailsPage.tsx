@@ -5,10 +5,11 @@ import CastCard from "../components/CastCard"
 import GenreChip from "../components/GenreChip"
 import Loader from "../components/Loader"
 import MovieCard from "../components/MovieCard"
+import ReleaseDate from "../components/ReleaseDate"
 import { useFetchMovieCredits } from "../hooks/useFetchMovieCredits"
 import { useFetchMovieDetails } from "../hooks/useFetchMovieDetails"
 import { useFetchMovieRecommendations } from "../hooks/useFetchMovieRecommendations"
-import { formattedDate, imageLink } from "../utils"
+import { imageLink } from "../utils"
 
 export default function MovieDetailsPage() {
 	const movieId = useParams().id as string
@@ -21,7 +22,6 @@ export default function MovieDetailsPage() {
 
 	const imageUrl = imageLink(movieDetails.poster_path ?? "")
 	const backDropImageUrl = imageLink(movieDetails.backdrop_path ?? "", "original")
-	const releaseDate = formattedDate(movieDetails.release_date)
 
 	return (
 		<Container>
@@ -40,7 +40,10 @@ export default function MovieDetailsPage() {
 						<GenreChip key={genre.id}>{genre.name}</GenreChip>
 					))}
 				</GenreContainer>
-				<ReleasedDate>{releaseDate}</ReleasedDate>
+				<ReleaseDate
+					date={movieDetails.release_date}
+					style={{ color: "#cbd5e1" }}
+				/>
 				<Overview>{movieDetails.overview}</Overview>
 				<h2 style={{ marginTop: "30px" }}>Casts</h2>
 				<CastContainer>
@@ -120,13 +123,6 @@ const MovieTitle = styled.div`
 const MovieTagline = styled.div`
 	font-size: 20px;
 	color: #e2e8f0;
-`
-
-const ReleasedDate = styled.div`
-	font-weight: bold;
-	text-transform: uppercase;
-	letter-spacing: 0.4px;
-	color: #cbd5e1;
 `
 
 const GenreContainer = styled.div`
