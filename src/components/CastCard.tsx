@@ -10,7 +10,7 @@ interface Props extends ComponentProps<"div"> {
 const CastCard: FC<Props> = ({ cast, ...rest }) => {
 	const imageUrl = cast.profile_path
 		? imageLink(cast.profile_path ?? "")
-		: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrIJkKK5Xl5uJtmXeAlVov4xhzFAmEhi7PbA&usqp=CAU"
+		: "https://i.pinimg.com/originals/ff/a0/9a/ffa09aec412db3f54deadf1b3781de2a.png"
 
 	return (
 		<Card {...rest}>
